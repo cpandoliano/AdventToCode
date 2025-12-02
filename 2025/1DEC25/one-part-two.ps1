@@ -40,6 +40,11 @@ function goRight {
     return $zeroCount, $currentIndex
 }
 
+if ($args.Count -ne 1)
+{
+    Write-Host "Usage: $($MyInvocation.MyCommand.Name) <sample.txt> for day1"
+    exit
+}
 
 $start = 50
 $zeroCount = 0 # final zero count
@@ -51,7 +56,7 @@ $left = "L"
 $right = "R"
 
 $lines = 0
-$path = ".\input.txt"
+$path = $args[0]
 
 $file = Get-Content -Path $path
 $lines = (Get-Content -Path $path).Count

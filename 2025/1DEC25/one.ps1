@@ -1,3 +1,9 @@
+if ($args.Count -ne 1)
+{
+    Write-Host "Usage: $($MyInvocation.MyCommand.Name) <sample.txt> for day1"
+    exit
+}
+
 $start = 50
 $zeroCount = 0
 $currentIndex = 0
@@ -9,12 +15,10 @@ $left = "L"
 $right = "R"
 
 $lines = 0
-$path = ".\sample.txt"
+$path = $args[0]
 
 $file = Get-Content -Path $path
 $lines = (Get-Content -Path $path).Count
-
-Write-Host $lines
 
 # loop lines in file
 $currentIndex = $start
