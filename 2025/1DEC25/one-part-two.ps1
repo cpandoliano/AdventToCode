@@ -68,9 +68,9 @@ for ($i = 0; $i -lt $lines; $i++) {
         # This splits the <letter><number> expression and only leaves the number
         $number = $file[$i] -replace "[^0-9]", ""
         # Cast the number "string" to an "int"
-        $int_num = [int]$number
+        $intNumber = [int]$number
 
-        $zeroReturn = goLeft -list $circularList -count $int_num -index $index
+        $zeroReturn = goLeft -list $circularList -count $intNumber -index $index
         $zeroCount = $zeroCount + $zeroReturn[0]
     }
     elseif ($file[$i].ToLower().Contains($right.ToLower())) {
@@ -79,9 +79,9 @@ for ($i = 0; $i -lt $lines; $i++) {
         $number = $file[$i] -replace "[^0-9]", ""
 
         # Cast the number "string" to an "int"
-        $int_num = [int]$number
+        $intNumber = [int]$number
 
-        $zeroReturn = goRight -list $circularList -count $int_num -index $index
+        $zeroReturn = goRight -list $circularList -count $intNumber -index $index
         $zeroCount = $zeroCount + $zeroReturn[0]
     }
     else {
