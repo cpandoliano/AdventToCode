@@ -1,31 +1,19 @@
-function InvalidIdPartOne {
+function findInvalidId {
     param ( 
         [int64] $start,
-        [int64] $end
+        [int64] $end,
+        [string] $regex
     )
 
     $invalidIdTotal = 0
     for ($j = $startRange; $j -le $endRange; $j++) {
-        if ($j -match "\b(\d+)\1\b") {
+        if ($j -match $regex) {
             $invalidIdTotal += $j
         }
     }
     return $invalidIdTotal
 }
-function InvalidIdPartTwo {
-    param ( 
-        [int64] $start,
-        [int64] $end
-    )
 
-    $invalidIdTotal = 0
-    for ($j = $startRange; $j -le $endRange; $j++) {
-        if ($j -match "\b(\d+)\1+\b") {
-            $invalidIdTotal += $j
-        }
-    }
-    return $invalidIdTotal
-}
 
 if ($args.Count -ne 1) {
     Write-Host "Usage: $($MyInvocation.MyCommand.Name) <sample.txt | input.txt> for day2"
@@ -37,6 +25,9 @@ $lineCount = 0
 
 [int64]$startRange = 0
 [int64]$endRange = 0
+
+$partOneRegEx = "\b(\d+)\1\b"
+$partTwoRegEx = "\b(\d+)\1+\b"
 
 $partOneInvalidIdTotal = 0
 $partTwoInvalidIdTotal = 0
@@ -64,10 +55,10 @@ for ($i = 0; $i -lt $lineCount; $i++) {
         continue
     }
 
-    $one = invalidIdPartOne -start $startRange -end $endRange
+    $one = findInvalidId -start $startRange -end $endRange -regex $partOneRegEx
     $partOneInvalidIdTotal += $one
     
-    $two = invalidIdPartTwo -start $startRange -end $endRange
+    $two = findInvalidId -start $startRange -end $endRange -regex $partTwoRegEx
     $partTwoInvalidIdTotal += $two
     
 }
